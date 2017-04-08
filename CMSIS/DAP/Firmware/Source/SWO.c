@@ -103,7 +103,7 @@ static void USART_Callback (uint32_t event) {
 // Enable or disable UART SWO Mode
 //   enable: enable flag
 //   return: 1 - Success, 0 - Error
-__weak uint32_t UART_SWO_Mode (uint32_t enable) {
+__WEAK uint32_t UART_SWO_Mode (uint32_t enable) {
   int32_t status;
 
   USART_Ready = 0U;
@@ -127,7 +127,7 @@ __weak uint32_t UART_SWO_Mode (uint32_t enable) {
 // Configure UART SWO Baudrate
 //   baudrate: requested baudrate
 //   return:   actual baudrate or 0 when not configured
-__weak uint32_t UART_SWO_Baudrate (uint32_t baudrate) {
+__WEAK uint32_t UART_SWO_Baudrate (uint32_t baudrate) {
   int32_t  status;
   uint32_t count;
 
@@ -173,7 +173,7 @@ __weak uint32_t UART_SWO_Baudrate (uint32_t baudrate) {
 // Control UART SWO Capture
 //   active: active flag
 //   return: 1 - Success, 0 - Error
-__weak uint32_t UART_SWO_Control (uint32_t active) {
+__WEAK uint32_t UART_SWO_Control (uint32_t active) {
   int32_t status;
 
   if (active) {
@@ -196,12 +196,12 @@ __weak uint32_t UART_SWO_Control (uint32_t active) {
 // Start UART SWO Capture
 //   buf:   pointer to buffer for capturing
 //   count: number of bytes to capture
-__weak void UART_SWO_Capture (uint8_t *buf, uint32_t count) {
+__WEAK void UART_SWO_Capture (uint8_t *buf, uint32_t count) {
   pUSART->Receive(buf, count);
 }
 
 // Update UART SWO Trace Info
-__weak void UART_SWO_Update (void) {
+__WEAK void UART_SWO_Update (void) {
   TracePending = pUSART->GetRxCount();
 }
 
@@ -213,32 +213,32 @@ __weak void UART_SWO_Update (void) {
 // Enable or disable Manchester SWO Mode
 //   enable: enable flag
 //   return: 1 - Success, 0 - Error
-__weak uint32_t Manchester_SWO_Mode (uint32_t enable) {
+__WEAK uint32_t Manchester_SWO_Mode (uint32_t enable) {
   return (0U);
 }
 
 // Configure Manchester SWO Baudrate
 //   baudrate: requested baudrate
 //   return:   actual baudrate or 0 when not configured
-__weak uint32_t Manchester_SWO_Baudrate (uint32_t baudrate) {
+__WEAK uint32_t Manchester_SWO_Baudrate (uint32_t baudrate) {
   return (0U);
 }
 
 // Control Manchester SWO Capture
 //   active: active flag
 //   return: 1 - Success, 0 - Error
-__weak uint32_t Manchester_SWO_Control (uint32_t active) {
+__WEAK uint32_t Manchester_SWO_Control (uint32_t active) {
   return (0U);
 }
 
 // Start Manchester SWO Capture
 //   buf:   pointer to buffer for capturing
 //   count: number of bytes to capture
-__weak void Manchester_SWO_Capture (uint8_t *buf, uint32_t count) {
+__WEAK void Manchester_SWO_Capture (uint8_t *buf, uint32_t count) {
 }
 
 // Update Manchester SWO Trace Info
-__weak void Manchester_SWO_Update (void) {
+__WEAK void Manchester_SWO_Update (void) {
 }
 
 #endif  /* (SWO_MANCHESTER != 0) */

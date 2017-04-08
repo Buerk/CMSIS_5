@@ -265,7 +265,7 @@ static uint32_t DAP_Connect(const uint8_t *request, uint8_t *response) {
   } else {
     port = *request;
   }
-  
+
   switch (port) {
 #if (DAP_SWD != 0)
     case DAP_PORT_SWD:
@@ -323,9 +323,9 @@ static uint32_t DAP_SWJ_Pins(const uint8_t *request, uint8_t *response) {
   uint32_t value;
   uint32_t select;
   uint32_t wait;
-  
+
   value  =  *(request+0);
-  select =  *(request+1); 
+  select =  *(request+1);
   wait   = (*(request+2) <<  0) |
            (*(request+3) <<  8) |
            (*(request+4) << 16) |
@@ -477,7 +477,7 @@ static uint32_t DAP_SWD_Configure(const uint8_t *request, uint8_t *response) {
   value = *request;
   DAP_Data.swd_conf.turnaround = (value & 0x03U) + 1U;
   DAP_Data.swd_conf.data_phase = (value & 0x04U) ? 1U : 0U;
-  
+
   *response = DAP_OK;
 #else
   *response = DAP_ERROR;
@@ -604,7 +604,7 @@ static uint32_t DAP_JTAG_IDCode(const uint8_t *request, uint8_t *response) {
 id_error:
 #endif
   *response = DAP_ERROR;
-  return ((1U << 16) | 1U); 
+  return ((1U << 16) | 1U);
 }
 
 
@@ -620,7 +620,7 @@ static uint32_t DAP_TransferConfigure(const uint8_t *request, uint8_t *response)
   DAP_Data.transfer.match_retry = *(request+3) | (*(request+4) << 8);
 
   *response = DAP_OK;
-  return ((5U << 16) | 1U); 
+  return ((5U << 16) | 1U);
 }
 
 
@@ -1380,7 +1380,7 @@ static uint32_t DAP_JTAG_WriteAbort(const uint8_t *request, uint8_t *response) {
   DAP_Data.jtag_dev.index = *request;
   if (DAP_Data.jtag_dev.index >= DAP_Data.jtag_dev.count) {
     *response = DAP_ERROR;
-    return (1U); 
+    return (1U);
   }
 
   // Select JTAG chain
@@ -1396,7 +1396,7 @@ static uint32_t DAP_JTAG_WriteAbort(const uint8_t *request, uint8_t *response) {
   JTAG_WriteAbort(data);
 
   *response = DAP_OK;
-  return (1U); 
+  return (1U);
 }
 #endif
 
@@ -1434,7 +1434,7 @@ static uint32_t DAP_WriteAbort(const uint8_t *request, uint8_t *response) {
 //   response: pointer to response data
 //   return:   number of bytes in response (lower 16 bits)
 //             number of bytes in request (upper 16 bits)
-__weak uint32_t DAP_ProcessVendorCommand(const uint8_t *request, uint8_t *response) {
+__WEAK uint32_t DAP_ProcessVendorCommand(const uint8_t *request, uint8_t *response) {
   *response = ID_DAP_Invalid;
   return ((1U << 16) | 1U);
 }
@@ -1564,7 +1564,7 @@ uint32_t DAP_ExecuteCommand(const uint8_t *request, uint8_t *response) {
       n = DAP_ProcessCommand(request, response);
       num += n;
       request  += (uint16_t)(n >> 16);
-      response += (uint16_t) n;  
+      response += (uint16_t) n;
     }
     return (num);
   }
